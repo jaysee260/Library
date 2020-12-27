@@ -40,7 +40,6 @@ namespace Library.Data.Repositories
 
         public async Task<Book> GetBookAsync(Guid id)
         {
-            // TODO: Handle Not Found
             return await _dbContext.Books.FirstOrDefaultAsync(b => b.Id.Equals(id));
         }
     }
