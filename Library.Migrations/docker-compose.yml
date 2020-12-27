@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  library-db:
+    image: postgres:alpine
+    container_name: $POSTGRES_CONTAINER_NAME
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_PORT
