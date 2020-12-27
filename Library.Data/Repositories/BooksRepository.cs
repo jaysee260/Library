@@ -15,14 +15,14 @@ namespace Library.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Book> AddBook(Book book)
+        public async Task<Book> AddBookAsync(Book book)
         {
             await _dbContext.Books.AddAsync(book);
             await _dbContext.SaveChangesAsync();
             return book;
         }
 
-        public async Task DeleteBook(Guid id)
+        public async Task RemoveBookAsync(Guid id)
         {
             var book = await _dbContext.Books.FirstOrDefaultAsync(b => b.Id.Equals(id));
 
@@ -33,12 +33,12 @@ namespace Library.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public async Task<IEnumerable<Book>> GetAllBooksAsync()
         {
             return await _dbContext.Books.ToListAsync();
         }
 
-        public async Task<Book> GetBook(Guid id)
+        public async Task<Book> GetBookAsync(Guid id)
         {
             // TODO: Handle Not Found
             return await _dbContext.Books.FirstOrDefaultAsync(b => b.Id.Equals(id));

@@ -8,10 +8,10 @@ namespace Library.Data.Repositories
     public interface IBooksRepository
     {
         // TODO: Implement pagination
-        Task<IEnumerable<Book>> GetAllBooks();
-        Task<Book> AddBook(Book book);
-        Task<Book> GetBook(Guid id);
-        Task DeleteBook(Guid id);
+        Task<IEnumerable<Book>> GetAllBooksAsync();
+        Task<Book> AddBookAsync(Book book);
+        Task<Book> GetBookAsync(Guid id);
+        Task RemoveBookAsync(Guid id);
         // TODO: Implement Update
     }
 }
