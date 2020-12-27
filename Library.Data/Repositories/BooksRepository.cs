@@ -26,7 +26,12 @@ namespace Library.Data.Repositories
 
         public async Task<Book> GetBookAsync(Guid id)
         {
-            return await _dbContext.Books.FirstOrDefaultAsync(b => b.Id.Equals(id));
+            return await _dbContext.Books
+                .AsSplitQuery()
+                .Include(b => b.Authors)
+                .Include(b => b.Publisher)
+                .Include(b => b.Tags)
+                .FirstOrDefaultAsync(b => b.Id.Equals(id));
         }
 
         public async Task RemoveBookAsync(Guid id)
@@ -52,6 +57,9 @@ namespace Library.Data.Repositories
                 : _dbContext.Books.OrderByDescending(b => b.Title);
 
             return await orderedQueryable
+                .Include(b => b.Authors)
+                .Include(b => b.Publisher)
+                .Include(b => b.Tags)
                 .Skip(offset)
                 .Take(resultsPerPage)
                 .ToListAsync();
