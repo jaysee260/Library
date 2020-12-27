@@ -31,15 +31,10 @@ namespace Library.Api.Controllers
             return book == null ? NotFound() : Ok(book);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllBooksAsync(
-            [FromQuery]int resultsPerPage = 25,
-            [FromQuery]int offset = 0,
-            [FromQuery]OrderBy orderBy = OrderBy.Asc
-        )
+        [HttpDelete("{id:Guid}")]
+        public async Task RemoveBookAsync(Guid id)
         {
-            var books = await _booksService.GetAllBooksAsync(resultsPerPage, offset, orderBy);
-            return Ok(books);
+            await _booksService.RemoveBookAsync(id);
         }
 
         [HttpGet("count")]
@@ -49,10 +44,15 @@ namespace Library.Api.Controllers
             return Ok(booksCount);
         }
 
-        [HttpDelete("{id:Guid}")]
-        public async Task RemoveBookAsync(Guid id)
+        [HttpGet]
+        public async Task<IActionResult> GetAllBooksAsync(
+            [FromQuery]int resultsPerPage = 25,
+            [FromQuery]int offset = 0,
+            [FromQuery]OrderBy orderBy = OrderBy.Asc
+        )
         {
-            await _booksService.RemoveBookAsync(id);
+            var books = await _booksService.GetAllBooksAsync(resultsPerPage, offset, orderBy);
+            return Ok(books);
         }
     }
 }
