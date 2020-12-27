@@ -10,6 +10,7 @@ namespace Library.Contracts.RestApi
         public IEnumerable<AuthorDto> Authors { get; set; }
         public string ISBN { get; set; }
         public int PublicationYear { get; set; }
+        public PublisherDto Publisher { get; set; }
         public IEnumerable<TagDto> Tags { get; set; }
     }
 }

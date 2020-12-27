@@ -15,6 +15,7 @@ namespace Library.Data.Entities
         public ICollection<Author> Authors { get; set; }
         public string ISBN { get; set; }
         public int PublicationYear { get; set; }
+        public Publisher Publisher { get; set; }
         public ICollection<Tag> Tags { get; set; }
     }
 }
