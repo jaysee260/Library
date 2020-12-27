@@ -9,9 +9,9 @@ namespace Library.Data.Repositories
     {
         // TODO: Implement pagination
         Task<IEnumerable<Book>> GetAllBooks();
-        void AddBook(Book book);
+        Task AddBook(Book book);
         Task<Book> GetBook(Guid id);
-        void DeleteBook(Guid id);
+        Task DeleteBook(Guid id);
         // TODO: Implement Update
     }
 }
