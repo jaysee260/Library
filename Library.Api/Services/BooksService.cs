@@ -36,16 +36,22 @@ namespace Library.Api.Services
             return bookDto;
         }
 
-        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(int resultsPerPage, int offset)
-        {
-            var bookEntities = await _booksRepository.GetAllBooksAsync(resultsPerPage, offset);
-            var bookDtos = _mapper.Map<IEnumerable<BookDto>>(bookEntities);
-            return bookDtos;
-        }
-
         public async Task RemoveBookAsync(Guid id)
         {
             await _booksRepository.RemoveBookAsync(id);
         }
+
+        public async Task<int> GetBooksCountAsync()
+        {
+            return await _booksRepository.GetBooksCountAsync();
+        }
+
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(int resultsPerPage, int offset, OrderBy orderBy)
+        {
+            var bookEntities = await _booksRepository.GetAllBooksAsync(resultsPerPage, offset, orderBy);
+            var bookDtos = _mapper.Map<IEnumerable<BookDto>>(bookEntities);
+            return bookDtos;
+        }
+
     }
 }

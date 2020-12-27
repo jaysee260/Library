@@ -32,10 +32,21 @@ namespace Library.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooksAsync([FromQuery]int resultsPerPage = 25, int offset = 0)
+        public async Task<IActionResult> GetAllBooksAsync(
+            [FromQuery]int resultsPerPage = 25,
+            [FromQuery]int offset = 0,
+            [FromQuery]OrderBy orderBy = OrderBy.Asc
+        )
         {
-            var books = await _booksService.GetAllBooksAsync(resultsPerPage, offset);
+            var books = await _booksService.GetAllBooksAsync(resultsPerPage, offset, orderBy);
             return Ok(books);
+        }
+
+        [HttpGet("count")]
+        public async Task<IActionResult> GetBooksCountAsync()
+        {
+            var booksCount = await _booksService.GetBooksCountAsync();
+            return Ok(booksCount);
         }
 
         [HttpDelete("{id:Guid}")]

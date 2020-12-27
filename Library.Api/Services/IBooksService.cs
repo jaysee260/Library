@@ -7,9 +7,10 @@ namespace Library.Api.Services
 {
     public interface IBooksService
     {
-        Task<IEnumerable<BookDto>> GetAllBooksAsync(int resultsPerPage, int offset);
         Task<BookDto> AddBook(BookDto book);
         Task<BookDto> GetBook(Guid id);
         Task RemoveBookAsync(Guid id);
+        Task<int> GetBooksCountAsync();
+        Task<IEnumerable<BookDto>> GetAllBooksAsync(int resultsPerPage, int offset, OrderBy orderBy);
     }
 }
