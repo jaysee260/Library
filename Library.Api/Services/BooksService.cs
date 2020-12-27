@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Library.Contracts.RestApi;
@@ -33,6 +34,13 @@ namespace Library.Api.Services
             var bookEntity = await _booksRepository.GetBookAsync(id);
             var bookDto = _mapper.Map<BookDto>(bookEntity);
             return bookDto;
+        }
+
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(int resultsPerPage, int offset)
+        {
+            var bookEntities = await _booksRepository.GetAllBooksAsync(resultsPerPage, offset);
+            var bookDtos = _mapper.Map<IEnumerable<BookDto>>(bookEntities);
+            return bookDtos;
         }
 
         public async Task RemoveBookAsync(Guid id)

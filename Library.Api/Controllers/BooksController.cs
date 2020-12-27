@@ -31,6 +31,13 @@ namespace Library.Api.Controllers
             return book == null ? NotFound() : Ok(book);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllBooksAsync([FromQuery]int resultsPerPage = 25, int offset = 0)
+        {
+            var books = await _booksService.GetAllBooksAsync(resultsPerPage, offset);
+            return Ok(books);
+        }
+
         [HttpDelete("{id:Guid}")]
         public async Task RemoveBookAsync(Guid id)
         {

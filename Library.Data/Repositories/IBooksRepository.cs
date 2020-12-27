@@ -7,8 +7,7 @@ namespace Library.Data.Repositories
 {
     public interface IBooksRepository
     {
-        // TODO: Implement pagination
-        Task<IEnumerable<Book>> GetAllBooksAsync();
+        Task<IEnumerable<Book>> GetAllBooksAsync(int resultsPerPage, int offset);
         Task<Book> AddBookAsync(Book book);
         Task<Book> GetBookAsync(Guid id);
         Task RemoveBookAsync(Guid id);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Library.Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -33,9 +34,13 @@ namespace Library.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooksAsync()
+        public async Task<IEnumerable<Book>> GetAllBooksAsync(int resultsPerPage, int offset)
         {
-            return await _dbContext.Books.ToListAsync();
+            return await _dbContext.Books
+                .OrderBy(b => b.Title)
+                .Skip(offset)
+                .Take(resultsPerPage)
+                .ToListAsync();
         }
 
         public async Task<Book> GetBookAsync(Guid id)
