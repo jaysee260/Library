@@ -9,6 +9,7 @@ namespace Library.Api.Mapping.Profiles
         public BooksMappingProfile()
         {
             CreateMap<AuthorDto, Author>().ReverseMap();
+            CreateMap<TagDto, Tag>().ReverseMap();
             CreateMap<BookDto, Book>().ReverseMap();
         }
     }
