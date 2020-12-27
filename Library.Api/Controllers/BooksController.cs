@@ -31,5 +31,10 @@ namespace Library.Api.Controllers
             return book == null ? NotFound() : Ok(book);
         }
 
+        [HttpDelete("{id:Guid}")]
+        public async Task RemoveBookAsync(Guid id)
+        {
+            await _booksService.RemoveBookAsync(id);
+        }
     }
 }

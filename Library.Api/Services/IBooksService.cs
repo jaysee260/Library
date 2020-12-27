@@ -8,5 +8,6 @@ namespace Library.Api.Services
     {
         Task<BookDto> AddBook(BookDto book);
         Task<BookDto> GetBook(Guid id);
+        Task RemoveBookAsync(Guid id);
     }
 }

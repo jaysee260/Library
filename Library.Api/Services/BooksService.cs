@@ -34,5 +34,10 @@ namespace Library.Api.Services
             var bookDto = _mapper.Map<BookDto>(bookEntity);
             return bookDto;
         }
+
+        public async Task RemoveBookAsync(Guid id)
+        {
+            await _booksRepository.DeleteBook(id);
+        }
     }
 }
