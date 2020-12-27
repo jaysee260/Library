@@ -1,3 +1,6 @@
+using System.Reflection;
+using AutoMapper;
+using Library.Api.Services;
 using Library.Data;
 using Library.Data.Repositories;
 using Library.Migrations;
@@ -30,6 +33,8 @@ namespace Library.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library.Api", Version = "v1" });
             });
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddDbContext<LibraryDbContext>(options =>
                 // TODO: Add retry logic?
                 options.UseNpgsql(
@@ -38,6 +43,7 @@ namespace Library.Api
                 )
             );
 
+            services.AddScoped<IBooksService, BooksService>();
             services.AddScoped<IBooksRepository, BooksRepository>();
         }
 

@@ -15,10 +15,11 @@ namespace Library.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddBook(Book book)
+        public async Task<Book> AddBook(Book book)
         {
             await _dbContext.Books.AddAsync(book);
             await _dbContext.SaveChangesAsync();
+            return book;
         }
 
         public async Task DeleteBook(Guid id)

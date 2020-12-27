@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Library.Data.Entities;
-using Library.Data.Repositories;
+using Library.Api.Services;
+using Library.Contracts.RestApi;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Api.Controllers
@@ -10,24 +10,24 @@ namespace Library.Api.Controllers
     [Route("[controller]")]
     public class BooksController : ControllerBase
     {
-        private readonly IBooksRepository _booksRepository;
+        private readonly IBooksService _booksService;
 
-        public BooksController(IBooksRepository booksRepository)
+        public BooksController(IBooksService booksService)
         {
-            _booksRepository = booksRepository;
+            _booksService = booksService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook(Book book)
+        public async Task<IActionResult> AddBook(BookDto book)
         {
-            await _booksRepository.AddBook(book);
-            return Ok(book);
+            var newBook = await _booksService.AddBook(book);
+            return Ok(newBook);
         }
 
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetBook(Guid id)
         {
-            var book = await _booksRepository.GetBook(id);
+            var book = await _booksService.GetBook(id);
             return book == null ? NotFound() : Ok(book);
         }
 
