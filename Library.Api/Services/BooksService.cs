@@ -22,14 +22,14 @@ namespace Library.Api.Services
             _booksRepository = booksRepository;
         }
         
-        public async Task<BookDto> AddBook(BookDto book)
+        public async Task<BookDto> AddBookAsync(BookDto book)
         {
             var bookEntity = _mapper.Map<Book>(book);
             var newBook = await _booksRepository.AddBookAsync(bookEntity);
             return _mapper.Map<BookDto>(newBook);
         }
 
-        public async Task<BookDto> GetBook(Guid id)
+        public async Task<BookDto> GetBookAsync(Guid id)
         {
             var bookEntity = await _booksRepository.GetBookAsync(id);
             var bookDto = _mapper.Map<BookDto>(bookEntity);

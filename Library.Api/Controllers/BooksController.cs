@@ -20,14 +20,14 @@ namespace Library.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBook(BookDto book)
         {
-            var newBook = await _booksService.AddBook(book);
+            var newBook = await _booksService.AddBookAsync(book);
             return Ok(newBook);
         }
 
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetBook(Guid id)
         {
-            var book = await _booksService.GetBook(id);
+            var book = await _booksService.GetBookAsync(id);
             return book == null ? NotFound() : Ok(book);
         }
 
