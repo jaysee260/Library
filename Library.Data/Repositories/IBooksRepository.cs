@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Library.Contracts.Common;
-using Library.Data.Entities;
+using Library.Contracts.DatabaseEntities;
 
 namespace Library.Data.Repositories
 {

@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using AutoMapper;
 using Library.Api.Services;
+using Library.Contracts.Mapping.Profiles;
 using Library.Data;
 using Library.Data.Repositories;
 using Library.Migrations;
@@ -38,7 +39,7 @@ namespace Library.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library.Api", Version = "v1" });
             });
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(typeof(BooksMappingProfile).Assembly);
 
             services.AddDbContext<LibraryDbContext>(options =>
                 // TODO: Add retry logic?

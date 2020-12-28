@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Library.Contracts.Common;
 
-namespace Library.Data.Entities
+namespace Library.Contracts.DatabaseEntities
 {
     [Table("Location")]
     public class Location

@@ -1,4 +1,4 @@
-using Library.Data.Entities;
+using Library.Contracts.DatabaseEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.Data

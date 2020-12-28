@@ -1,8 +1,8 @@
 using AutoMapper;
 using Library.Contracts.RestApi;
-using Library.Data.Entities;
+using Library.Contracts.DatabaseEntities;
 
-namespace Library.Api.Mapping.Profiles
+namespace Library.Contracts.Mapping.Profiles
 {
     public class BooksMappingProfile : Profile
     {

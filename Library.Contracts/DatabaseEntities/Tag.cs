@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Library.Data.Entities
+namespace Library.Contracts.DatabaseEntities
 {
     [Table("Tag")]
     public class Tag

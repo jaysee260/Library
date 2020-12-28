@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Library.Contracts.Common;
 using Library.Contracts.RestApi;
-using Library.Data.Entities;
+using Library.Contracts.DatabaseEntities;
 using Library.Data.Repositories;
 
 namespace Library.Api.Services
