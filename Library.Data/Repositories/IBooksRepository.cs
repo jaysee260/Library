@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Library.Contracts.RestApi;
+using Library.Contracts.Common;
 using Library.Data.Entities;
 
 namespace Library.Data.Repositories

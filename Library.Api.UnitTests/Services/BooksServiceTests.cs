@@ -5,6 +5,7 @@ using AutoMapper;
 using FluentAssertions;
 using Library.Api.Mapping.Profiles;
 using Library.Api.Services;
+using Library.Contracts.Common;
 using Library.Contracts.RestApi;
 using Library.Data.Entities;
 using Library.Data.Repositories;

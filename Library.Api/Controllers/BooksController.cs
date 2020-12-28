@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Library.Api.Services;
+using Library.Contracts.Common;
 using Library.Contracts.RestApi;
 using Microsoft.AspNetCore.Mvc;
 

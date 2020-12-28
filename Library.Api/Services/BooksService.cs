@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Library.Contracts.Common;
 using Library.Contracts.RestApi;
 using Library.Data.Entities;
 using Library.Data.Repositories;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Library.Contracts.RestApi;
+using Library.Contracts.Common;
 using Library.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
