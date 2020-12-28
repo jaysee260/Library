@@ -29,13 +29,20 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> GetBook(Guid id)
         {
             var book = await _booksService.GetBookAsync(id);
-            return book == null ? NotFound() : Ok(book);
+            
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(book);
         }
 
         [HttpDelete("{id:Guid}")]
-        public async Task RemoveBookAsync(Guid id)
+        public async Task<IActionResult> RemoveBookAsync(Guid id)
         {
             await _booksService.RemoveBookAsync(id);
+            return NoContent();
         }
 
         [HttpGet("count")]
