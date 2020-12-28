@@ -30,6 +30,7 @@ namespace Library.Data.Repositories
                 .AsSplitQuery()
                 .Include(b => b.Authors)
                 .Include(b => b.Publisher)
+                .Include(b => b.Location)
                 .Include(b => b.Tags)
                 .FirstOrDefaultAsync(b => b.Id.Equals(id));
         }
@@ -59,6 +60,7 @@ namespace Library.Data.Repositories
             return await orderedQueryable
                 .Include(b => b.Authors)
                 .Include(b => b.Publisher)
+                .Include(b => b.Location)
                 .Include(b => b.Tags)
                 .Skip(offset)
                 .Take(resultsPerPage)

@@ -16,6 +16,7 @@ namespace Library.Data.Entities
         public string ISBN { get; set; }
         public int PublicationYear { get; set; }
         public Publisher Publisher { get; set; }
+        public Location Location { get; set; }
         public ICollection<Tag> Tags { get; set; }
     }
 }

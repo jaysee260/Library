@@ -10,6 +10,7 @@ namespace Library.Api.Mapping.Profiles
         {
             CreateMap<AuthorDto, Author>().ReverseMap();
             CreateMap<PublisherDto, Publisher>().ReverseMap();
+            CreateMap<LocationDto, Location>().ReverseMap();
             CreateMap<TagDto, Tag>().ReverseMap();
             CreateMap<BookDto, Book>().ReverseMap();
         }

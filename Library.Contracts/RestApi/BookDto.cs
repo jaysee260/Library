@@ -11,6 +11,7 @@ namespace Library.Contracts.RestApi
         public string ISBN { get; set; }
         public int PublicationYear { get; set; }
         public PublisherDto Publisher { get; set; }
+        public LocationDto Location { get; set; }
         public IEnumerable<TagDto> Tags { get; set; }
     }
 }
