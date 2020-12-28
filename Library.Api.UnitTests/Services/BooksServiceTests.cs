@@ -23,12 +23,11 @@ namespace Library.Api.UnitTests.Services
         
         public BooksServiceTests()
         {
-
         }
 
 
         [Fact]
-        public async Task AddBookAsync_Returns_Created_Book_With_Id()
+        public async Task AddBookAsync_Returns_Book_With_Id()
         {
 
             // Arrange
@@ -82,7 +81,7 @@ namespace Library.Api.UnitTests.Services
         }
 
         [Fact]
-        public async Task GetBooksCountAsync_Returns_Total_Count()
+        public async Task GetBooksCountAsync_Returns_An_Int()
         {
             // Arrange
             var mockBooksCollection = Enumerable
@@ -97,7 +96,7 @@ namespace Library.Api.UnitTests.Services
             var count = await service.GetBooksCountAsync();
             
             // Assert
-            count.Should().NotBe(0);
+            count.Should().NotBe(0).And.BeOfType(typeof(int));
             count.Should().Be(mockBooksCollection.Count());
         }
 
