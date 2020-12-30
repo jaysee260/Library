@@ -20,11 +20,13 @@ namespace Library.Api.UnitTests.Services
         private readonly IMapper _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BooksMappingProfile>()));
         private Mock<IBooksRepository> MockBooksRepository { get; } = new Mock<IBooksRepository>(MockBehavior.Strict);
         private Mock<IPublisherRepository> MockPublisherRepository { get; } = new Mock<IPublisherRepository>(MockBehavior.Strict);
+        private Mock<IAuthorsRepository> MockAuthorsRepository { get; } = new Mock<IAuthorsRepository>(MockBehavior.Strict);
         private Mock<ITagsRepository> MockTagsRepository { get; } = new Mock<ITagsRepository>(MockBehavior.Strict);
         private IBooksService Service => new BooksService(
             _mapper,
             MockBooksRepository.Object,
             MockPublisherRepository.Object,
+            MockAuthorsRepository.Object,
             MockTagsRepository.Object
         );
         

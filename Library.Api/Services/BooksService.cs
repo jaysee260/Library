@@ -15,32 +15,28 @@ namespace Library.Api.Services
         private readonly IMapper _mapper;
         private readonly IBooksRepository _booksRepository;
         private readonly IPublisherRepository _publisherRepository;
+        private readonly IAuthorsRepository _authorsRepository;
         private readonly ITagsRepository _tagsRepository;
 
         public BooksService(
             IMapper mapper,
             IBooksRepository booksRepository,
             IPublisherRepository publisherRepository,
+            IAuthorsRepository authorsRepository,
             ITagsRepository tagsRepository
         )
         {
             _mapper = mapper;
             _booksRepository = booksRepository;
             _publisherRepository = publisherRepository;
+            _authorsRepository = authorsRepository;
             _tagsRepository = tagsRepository;
         }
         
         public async Task<BookDto> AddBookAsync(BookDto book)
         {
-            /* TODO Check if:
-                - Any of the Authors exist. []
-                - The Publisher exists. [x]
-                - Any of the Tags exist. [x]
-                
-                For any of these that is true, pull the respective matches
-                from the DB and set them on the incoming BookDto.
-            */
             SetPublisherIfItAlreadyExists(book);
+            SetAnyAuthorsThatMayAlreadyExist(book);
             SetAnyTagsThatMayAlreadyExist(book);
             
             var bookEntity = _mapper.Map<Book>(book);
@@ -80,10 +76,34 @@ namespace Library.Api.Services
             book.Publisher = _mapper.Map<PublisherDto>(publisher);
         }
 
+        private async void SetAnyAuthorsThatMayAlreadyExist(BookDto book)
+        {
+            if (!book.Authors.Any()) return;
+            
+            var existingAuthors = new List<Author>();
+            var nonExistingAuthors = new List<AuthorDto>();
+
+            foreach (var incomingAuthor in book.Authors)
+            {
+                var author = await _authorsRepository.GetAuthorByNameAsync(incomingAuthor.FirstName, incomingAuthor.LastName);
+                if (author != null)
+                {
+                    existingAuthors.Add(author);
+                }
+                else
+                {
+                    nonExistingAuthors.Add(incomingAuthor);
+                }
+            }
+
+            if (!existingAuthors.Any()) return;
+            var existingAuthorsDtos = _mapper.Map<List<AuthorDto>>(existingAuthors);
+            book.Authors = existingAuthorsDtos.Concat(nonExistingAuthors);
+        }
+
         private async void SetAnyTagsThatMayAlreadyExist(BookDto book)
         {
             if (!book.Tags.Any()) return;
-            
             var existingTags = new List<Tag>();
             var nonExistingTags = new List<TagDto>();
             
@@ -101,9 +121,8 @@ namespace Library.Api.Services
             }
 
             if (!existingTags.Any()) return;
-
-            var existingTagDtos = _mapper.Map<List<TagDto>>(existingTags);
-            book.Tags = existingTagDtos.Concat(nonExistingTags);
+            var existingTagsDtos = _mapper.Map<List<TagDto>>(existingTags);
+            book.Tags = existingTagsDtos.Concat(nonExistingTags);
         }
     }
 }
