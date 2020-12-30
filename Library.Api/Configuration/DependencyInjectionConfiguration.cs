@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IBooksRepository, BooksRepository>();
             services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<ISearchRepository, SearchRepository>();
+            services.AddScoped<IPublisherRepository, PublisherRepository>();
 
             return services;
         }
