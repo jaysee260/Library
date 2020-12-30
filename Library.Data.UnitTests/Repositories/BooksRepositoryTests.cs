@@ -13,7 +13,8 @@ namespace Library.Data.UnitTests.Repositories
     public class BooksRepositoryTests
     {
         private readonly LibraryDbContext _mockDbContext;
-        private readonly IBooksRepository repository;
+        private IBooksRepository Repository;
+        
         public BooksRepositoryTests()
         {
             var mockContextOptions = new DbContextOptionsBuilder<LibraryDbContext>()
@@ -27,7 +28,7 @@ namespace Library.Data.UnitTests.Repositories
             _mockDbContext.Books.AddRange(mockSeedData);
             _mockDbContext.SaveChanges();
             
-            repository = new BooksRepository(_mockDbContext);
+            Repository = new BooksRepository(_mockDbContext);
         }
 
         [Fact]
@@ -64,7 +65,7 @@ namespace Library.Data.UnitTests.Repositories
 
             // Act
             book.Id.Should().BeEmpty();
-            var newBook = await repository.AddBookAsync(book);
+            var newBook = await Repository.AddBookAsync(book);
 
             // Assert
             newBook.Id.Should().NotBeEmpty();
@@ -81,7 +82,7 @@ namespace Library.Data.UnitTests.Repositories
             var bookId = await _mockDbContext.Books.Select(b => b.Id).FirstAsync();
 
             // Act
-            var match = await repository.GetBookAsync(bookId);
+            var match = await Repository.GetBookAsync(bookId);
 
             // Assert
             match.Should().NotBeNull();
@@ -96,7 +97,7 @@ namespace Library.Data.UnitTests.Repositories
             var bookId = await _mockDbContext.Books.Select(b => b.Id).FirstAsync();
             
             // Act
-            await repository.RemoveBookAsync(bookId);
+            await Repository.RemoveBookAsync(bookId);
             
             // Assert
             var countAfterDelete = await _mockDbContext.Books.CountAsync();
@@ -109,7 +110,7 @@ namespace Library.Data.UnitTests.Repositories
             // Arrange
             
             // Act
-            var count = await repository.GetBooksCountAsync();
+            var count = await Repository.GetBooksCountAsync();
             
             // Assert
             count.Should().BeOfType(typeof(int));
@@ -122,7 +123,7 @@ namespace Library.Data.UnitTests.Repositories
             var expectedCount = await _mockDbContext.Books.CountAsync();
             
             // Act
-            var books = await repository.GetAllBooksAsync(
+            var books = await Repository.GetAllBooksAsync(
                 resultsPerPage: 25,
                 offset: 0,
                 orderBy: OrderBy.Asc

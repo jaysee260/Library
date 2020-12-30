@@ -18,14 +18,9 @@ namespace Library.Api.UnitTests.Services
     public class BooksServiceTests
     {
         private readonly IMapper _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BooksMappingProfile>()));
-        private Mock<IBooksRepository> mockBooksRepository { get; set; } = new Mock<IBooksRepository>(MockBehavior.Strict);
-        private IBooksService service => new BooksService(_mapper, mockBooksRepository.Object);
+        private Mock<IBooksRepository> MockBooksRepository { get; } = new Mock<IBooksRepository>(MockBehavior.Strict);
+        private IBooksService Service => new BooksService(_mapper, MockBooksRepository.Object);
         
-        public BooksServiceTests()
-        {
-        }
-
-
         [Fact]
         public async Task AddBookAsync_Returns_Book_With_Id()
         {
@@ -33,12 +28,12 @@ namespace Library.Api.UnitTests.Services
             // Arrange
             var newBookId = Guid.NewGuid();
             
-            mockBooksRepository
+            MockBooksRepository
                 .Setup(x => x.AddBookAsync(It.IsAny<Book>()))
                 .ReturnsAsync(new Book { Id = newBookId });
 
             // Act
-            var result = await service.AddBookAsync(new BookDto());
+            var result = await Service.AddBookAsync(new BookDto());
 
             // Assert
             result.Should().NotBeNull().And.BeOfType<BookDto>();
@@ -51,12 +46,12 @@ namespace Library.Api.UnitTests.Services
             // Arrange
             var idOfExistingBook = Guid.NewGuid();
 
-            mockBooksRepository
+            MockBooksRepository
                 .Setup(x => x.GetBookAsync(It.Is<Guid>(param => param.Equals(idOfExistingBook))))
                 .ReturnsAsync(new Book { Id = idOfExistingBook });
 
             // Act
-            var result = await service.GetBookAsync(idOfExistingBook);
+            var result = await Service.GetBookAsync(idOfExistingBook);
 
             // Assert
             result.Should().NotBeNull().And.BeOfType<BookDto>();
@@ -69,15 +64,15 @@ namespace Library.Api.UnitTests.Services
             // Arrange
             var idOfExistingBook = Guid.NewGuid();
 
-            mockBooksRepository
+            MockBooksRepository
                 .Setup(x => x.RemoveBookAsync(It.Is<Guid>(param => param.Equals(idOfExistingBook))))
                 .Returns(Task.CompletedTask);
 
             // Act
-            await service.RemoveBookAsync(idOfExistingBook);
+            await Service.RemoveBookAsync(idOfExistingBook);
 
             // Assert
-            mockBooksRepository.Verify(x => x.RemoveBookAsync(idOfExistingBook), Times.Once);
+            MockBooksRepository.Verify(x => x.RemoveBookAsync(idOfExistingBook), Times.Once);
         }
 
         [Fact]
@@ -88,12 +83,12 @@ namespace Library.Api.UnitTests.Services
                 .Range(0, new Random().Next(minValue: 1, maxValue: 100))
                 .Select(x => new Book());
 
-            mockBooksRepository
+            MockBooksRepository
                 .Setup(x => x.GetBooksCountAsync())
                 .ReturnsAsync(mockBooksCollection.Count());
 
             // Act
-            var count = await service.GetBooksCountAsync();
+            var count = await Service.GetBooksCountAsync();
             
             // Assert
             count.Should().NotBe(0).And.BeOfType(typeof(int));
@@ -107,7 +102,7 @@ namespace Library.Api.UnitTests.Services
             var collectionSize = new Random().Next(minValue: 1, maxValue: 100);
             var mockBooksCollection = Enumerable.Range(0, collectionSize).Select(x => new Book());
 
-            mockBooksRepository
+            MockBooksRepository
                 .Setup(x => x.GetAllBooksAsync(
                     It.IsAny<int>(),
                     It.IsAny<int>(),
@@ -116,7 +111,7 @@ namespace Library.Api.UnitTests.Services
                 .ReturnsAsync(mockBooksCollection);
 
             // Act
-            var results = await service.GetAllBooksAsync(resultsPerPage: 25, offset: 0, orderBy: OrderBy.Asc);
+            var results = await Service.GetAllBooksAsync(resultsPerPage: 25, offset: 0, orderBy: OrderBy.Asc);
 
             // Assert
             results.Should().NotBeNullOrEmpty().And.ContainItemsAssignableTo<BookDto>();

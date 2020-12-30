@@ -15,7 +15,7 @@ namespace Library.Api.UnitTests.Controllers
 {
     public class BooksControllerTests
     {
-        private Mock<IBooksService> MockBooksService { get; set; } = new Mock<IBooksService>(MockBehavior.Strict);
+        private Mock<IBooksService> MockBooksService { get; } = new Mock<IBooksService>(MockBehavior.Strict);
         private BooksController Controller => new BooksController(MockBooksService.Object);
 
         [Fact]
