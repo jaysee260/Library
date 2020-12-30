@@ -19,7 +19,8 @@ namespace Library.Api.UnitTests.Services
     {
         private readonly IMapper _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BooksMappingProfile>()));
         private Mock<IBooksRepository> MockBooksRepository { get; } = new Mock<IBooksRepository>(MockBehavior.Strict);
-        private IBooksService Service => new BooksService(_mapper, MockBooksRepository.Object);
+        private Mock<IPublisherRepository> MockPublisherRepository { get; } = new Mock<IPublisherRepository>(MockBehavior.Strict);
+        private IBooksService Service => new BooksService(_mapper, MockBooksRepository.Object, MockPublisherRepository.Object);
         
         [Fact]
         public async Task AddBookAsync_Returns_Book_With_Id()

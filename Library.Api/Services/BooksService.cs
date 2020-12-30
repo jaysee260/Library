@@ -12,19 +12,32 @@ namespace Library.Api.Services
     public class BooksService : IBooksService
     {
         private readonly IMapper _mapper;
-        private IBooksRepository _booksRepository;
+        private readonly IBooksRepository _booksRepository;
+        private readonly IPublisherRepository _publisherRepository;
 
         public BooksService(
             IMapper mapper,
-            IBooksRepository booksRepository
+            IBooksRepository booksRepository,
+            IPublisherRepository publisherRepository
         )
         {
             _mapper = mapper;
             _booksRepository = booksRepository;
+            _publisherRepository = publisherRepository;
         }
         
         public async Task<BookDto> AddBookAsync(BookDto book)
         {
+            /* TODO Check if:
+                - Any of the Authors exist. []
+                - The Publisher exists. [x]
+                - Any of the Tags exist. []
+                
+                For any of these that is true, pull the respective matches
+                from the DB and set them on the incoming BookDto.
+            */
+            SetPublisherIfItAlreadyExists(book);
+            
             var bookEntity = _mapper.Map<Book>(book);
             var newBook = await _booksRepository.AddBookAsync(bookEntity);
             return _mapper.Map<BookDto>(newBook);
@@ -54,5 +67,12 @@ namespace Library.Api.Services
             return bookDtos;
         }
 
+        private async void SetPublisherIfItAlreadyExists(BookDto book)
+        {
+            if (book.Publisher?.Name == null) return;
+            var publisher = await _publisherRepository.GetPublisherByNameAsync(book.Publisher.Name);
+            if (publisher == null) return;
+            book.Publisher = _mapper.Map<PublisherDto>(publisher);
+        }
     }
 }
