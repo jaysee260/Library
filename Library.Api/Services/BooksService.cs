@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Library.Contracts.Common;
@@ -14,16 +15,19 @@ namespace Library.Api.Services
         private readonly IMapper _mapper;
         private readonly IBooksRepository _booksRepository;
         private readonly IPublisherRepository _publisherRepository;
+        private readonly ITagsRepository _tagsRepository;
 
         public BooksService(
             IMapper mapper,
             IBooksRepository booksRepository,
-            IPublisherRepository publisherRepository
+            IPublisherRepository publisherRepository,
+            ITagsRepository tagsRepository
         )
         {
             _mapper = mapper;
             _booksRepository = booksRepository;
             _publisherRepository = publisherRepository;
+            _tagsRepository = tagsRepository;
         }
         
         public async Task<BookDto> AddBookAsync(BookDto book)
@@ -31,12 +35,13 @@ namespace Library.Api.Services
             /* TODO Check if:
                 - Any of the Authors exist. []
                 - The Publisher exists. [x]
-                - Any of the Tags exist. []
+                - Any of the Tags exist. [x]
                 
                 For any of these that is true, pull the respective matches
                 from the DB and set them on the incoming BookDto.
             */
             SetPublisherIfItAlreadyExists(book);
+            SetAnyTagsThatMayAlreadyExist(book);
             
             var bookEntity = _mapper.Map<Book>(book);
             var newBook = await _booksRepository.AddBookAsync(bookEntity);
@@ -73,6 +78,32 @@ namespace Library.Api.Services
             var publisher = await _publisherRepository.GetPublisherByNameAsync(book.Publisher.Name);
             if (publisher == null) return;
             book.Publisher = _mapper.Map<PublisherDto>(publisher);
+        }
+
+        private async void SetAnyTagsThatMayAlreadyExist(BookDto book)
+        {
+            if (!book.Tags.Any()) return;
+            
+            var existingTags = new List<Tag>();
+            var nonExistingTags = new List<TagDto>();
+            
+            foreach (var incomingTag in book.Tags)
+            {
+                var tag = await _tagsRepository.GetTagByNameAsync(incomingTag.Name);
+                if (tag != null)
+                {
+                    existingTags.Add(tag);
+                }
+                else
+                {
+                    nonExistingTags.Add(incomingTag);
+                }
+            }
+
+            if (!existingTags.Any()) return;
+
+            var existingTagDtos = _mapper.Map<List<TagDto>>(existingTags);
+            book.Tags = existingTagDtos.Concat(nonExistingTags);
         }
     }
 }

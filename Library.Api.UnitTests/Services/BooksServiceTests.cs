@@ -20,7 +20,13 @@ namespace Library.Api.UnitTests.Services
         private readonly IMapper _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BooksMappingProfile>()));
         private Mock<IBooksRepository> MockBooksRepository { get; } = new Mock<IBooksRepository>(MockBehavior.Strict);
         private Mock<IPublisherRepository> MockPublisherRepository { get; } = new Mock<IPublisherRepository>(MockBehavior.Strict);
-        private IBooksService Service => new BooksService(_mapper, MockBooksRepository.Object, MockPublisherRepository.Object);
+        private Mock<ITagsRepository> MockTagsRepository { get; } = new Mock<ITagsRepository>(MockBehavior.Strict);
+        private IBooksService Service => new BooksService(
+            _mapper,
+            MockBooksRepository.Object,
+            MockPublisherRepository.Object,
+            MockTagsRepository.Object
+        );
         
         [Fact]
         public async Task AddBookAsync_Returns_Book_With_Id()
@@ -40,6 +46,8 @@ namespace Library.Api.UnitTests.Services
             result.Should().NotBeNull().And.BeOfType<BookDto>();
             result.Id.Should().Be(newBookId);
         }
+        
+        // TODO: Add tests to check extra conditional functionality in AddBookAsync
 
         [Fact]
         public async Task GetBookAsync_Returns_Book_With_Matching_Id()
