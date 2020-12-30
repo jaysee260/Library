@@ -29,17 +29,15 @@ namespace Library.Api
         {
 
             services.AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                });
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library.Api", Version = "v1" });
             });
-
-            services.AddAutoMapper(typeof(BooksMappingProfile).Assembly);
 
             services.AddDbContext<LibraryDbContext>(options =>
                 // TODO: Add retry logic?
@@ -49,8 +47,7 @@ namespace Library.Api
                 )
             );
 
-            services.AddScoped<IBooksService, BooksService>();
-            services.AddScoped<IBooksRepository, BooksRepository>();
+            services.SetupDependencyInjection();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
