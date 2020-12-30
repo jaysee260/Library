@@ -1,4 +1,6 @@
-﻿using Library.Api.Services;
+﻿using System.Threading.Tasks;
+using Library.Api.Services;
+using Library.Contracts.RestApi;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Api.Controllers
@@ -12,6 +14,13 @@ namespace Library.Api.Controllers
         public SearchController(ISearchService searchService)
         {
             _searchService = searchService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search([FromQuery]BookSearchCriteria searchCriteria)
+        {
+            var results = await _searchService.Search(searchCriteria);
+            return Ok(results);
         }
     }
 }

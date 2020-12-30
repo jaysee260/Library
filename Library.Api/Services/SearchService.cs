@@ -1,4 +1,7 @@
-﻿using Library.Data.Repositories;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Library.Contracts.RestApi;
+using Library.Data.Repositories;
 
 namespace Library.Api.Services
 {
@@ -9,6 +12,11 @@ namespace Library.Api.Services
         public SearchService(ISearchRepository searchRepository)
         {
             _searchRepository = searchRepository;
+        }
+
+        public Task<IEnumerable<BookDto>> Search(BookSearchCriteria searchCriteria)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
