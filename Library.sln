@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Data.UnitTests", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Api.IntegrationTests", "Library.Api.IntegrationTests\Library.Api.IntegrationTests.csproj", "{5BB060A1-66B3-47FB-9DAD-809F612FA10D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.FrontDesk", "Library.FrontDesk\Library.FrontDesk.csproj", "{9A460E7E-762C-4726-A819-99EEC2CB2FFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,5 +116,17 @@ Global
 		{5BB060A1-66B3-47FB-9DAD-809F612FA10D}.Release|x64.Build.0 = Release|Any CPU
 		{5BB060A1-66B3-47FB-9DAD-809F612FA10D}.Release|x86.ActiveCfg = Release|Any CPU
 		{5BB060A1-66B3-47FB-9DAD-809F612FA10D}.Release|x86.Build.0 = Release|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Release|x64.Build.0 = Release|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A460E7E-762C-4726-A819-99EEC2CB2FFB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
