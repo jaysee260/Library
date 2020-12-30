@@ -19,14 +19,14 @@ namespace Library.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook(BookDto book)
+        public async Task<IActionResult> AddBookAsync(BookDto book)
         {
             var newBook = await _booksService.AddBookAsync(book);
             return Ok(newBook);
         }
 
         [HttpGet("{id:Guid}")]
-        public async Task<IActionResult> GetBook(Guid id)
+        public async Task<IActionResult> GetBookAsync(Guid id)
         {
             var book = await _booksService.GetBookAsync(id);
             
