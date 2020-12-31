@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Data.UnitTests", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Api.IntegrationTests", "Library.Api.IntegrationTests\Library.Api.IntegrationTests.csproj", "{5BB060A1-66B3-47FB-9DAD-809F612FA10D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Testing", "Library.Testing\Library.Testing.csproj", "{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,5 +116,17 @@ Global
 		{5BB060A1-66B3-47FB-9DAD-809F612FA10D}.Release|x64.Build.0 = Release|Any CPU
 		{5BB060A1-66B3-47FB-9DAD-809F612FA10D}.Release|x86.ActiveCfg = Release|Any CPU
 		{5BB060A1-66B3-47FB-9DAD-809F612FA10D}.Release|x86.Build.0 = Release|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Debug|x64.Build.0 = Debug|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Debug|x86.Build.0 = Debug|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Release|x64.ActiveCfg = Release|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Release|x64.Build.0 = Release|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Release|x86.ActiveCfg = Release|Any CPU
+		{CB70DD27-37B2-4CFC-AA82-FBD84A75FE35}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
