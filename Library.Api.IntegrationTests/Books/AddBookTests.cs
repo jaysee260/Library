@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Library.Api.IntegrationTests.Fixtures;
 using Library.Contracts.RestApi;
 using Library.Testing.Data;
 using Library.Testing.Extensions;
@@ -9,7 +10,8 @@ using Xunit;
 
 namespace Library.Api.IntegrationTests.Books
 {
-    public class AddBookTests : IClassFixture<LibraryApiFixture>
+    [Collection("Library Api Collection")]
+    public class AddBookTests
     {
         private readonly LibraryApiFixture _fixture;
         private readonly HttpClientWrapper _client;
