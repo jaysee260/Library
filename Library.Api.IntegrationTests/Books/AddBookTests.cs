@@ -22,7 +22,7 @@ namespace Library.Api.IntegrationTests.Books
         }
 
         [Fact]
-        public async Task AddBook_ReturnsOkResponse_WithCreatedBook()
+        public async Task AddingANewBook_ReturnsOkResponse_WithCreatedBook()
         {
             var bookDto = TestData.BookDto;
             var response = await _client.PostAsync(Url, bookDto);
@@ -31,6 +31,24 @@ namespace Library.Api.IntegrationTests.Books
             response.StatusCode.Should().BeEquivalentTo(HttpStatusCode.OK);
             content.Should().NotBeNull();
             content.Id.Should().NotBeEmpty();
+        }
+
+        [Fact(Skip = "Because can't test until there's an Authors endpoint")]
+        public async Task AddingABook_WithAnExistingAuthor_DoesNotDuplicateTheAuthor()
+        {
+            
+        }
+        
+        [Fact(Skip = "Because can't test until there's a Publishers endpoint")]
+        public async Task AddingABook_WithAnExistingPublisher_DoesNotDuplicateThePublisher()
+        {
+            
+        }
+        
+        [Fact(Skip = "Because can't test until there's a Tags endpoint")]
+        public async Task AddingABook_WithAnExistingTag_DoesNotDuplicateTheTag()
+        {
+            
         }
     }
 }
