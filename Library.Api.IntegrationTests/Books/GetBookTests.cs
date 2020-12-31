@@ -55,6 +55,16 @@ namespace Library.Api.IntegrationTests.Books
             response.StatusCode.Should().BeEquivalentTo(HttpStatusCode.NotFound);
         }
         
-        // TODO: Include GetBooksCount and GetAllBooks tests here
+        [Fact]
+        public async Task GettingBooksCount_ReturnsOkResponse_WithAnInteger()
+        {
+            var response = await _client.GetAsync("/books/count");
+            var count = response.GetResponseContent<int>();
+            
+            response.StatusCode.Should().BeEquivalentTo(HttpStatusCode.OK);
+            count.Should().BeGreaterThan(0);
+        }
+        
+        // TODO: Include GetAllBooks tests here
     }
 }
