@@ -9,6 +9,7 @@ using Library.Contracts.Common;
 using Library.Contracts.RestApi;
 using Library.Contracts.DatabaseEntities;
 using Library.Data.Repositories;
+using Library.Testing.Data;
 using Moq;
 using Xunit;
 
@@ -35,18 +36,30 @@ namespace Library.Api.UnitTests.Services
         {
 
             // Arrange
-            var newBookId = Guid.NewGuid();
+            var expectedBook = TestData.BookEntity;
             
             MockBooksRepository
                 .Setup(x => x.AddBookAsync(It.IsAny<Book>()))
-                .ReturnsAsync(new Book { Id = newBookId });
+                .ReturnsAsync(expectedBook);
+
+            MockPublisherRepository
+                .Setup(x => x.GetPublisherByNameAsync(It.IsAny<string>()))
+                .ReturnsAsync(null as Publisher);
+
+            MockAuthorsRepository
+                .Setup(x => x.GetAuthorByNameAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync(null as Author);
+
+            MockTagsRepository
+                .Setup(x => x.GetTagByNameAsync(It.IsAny<string>()))
+                .ReturnsAsync(null as Tag);
 
             // Act
-            var result = await Service.AddBookAsync(new BookDto());
+            var result = await Service.AddBookAsync(TestData.BookDto);
 
             // Assert
             result.Should().NotBeNull().And.BeOfType<BookDto>();
-            result.Id.Should().Be(newBookId);
+            result.Id.Should().Be(expectedBook.Id);
         }
         
         // TODO: Add tests to check extra conditional functionality in AddBookAsync

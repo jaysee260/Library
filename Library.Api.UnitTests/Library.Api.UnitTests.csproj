@@ -20,5 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Library.Api\Library.Api.csproj" />
     <ProjectReference Include="..\Library.Data\Library.Data.csproj" />
+    <ProjectReference Include="..\Library.Testing\Library.Testing.csproj" />
   </ItemGroup>
 </Project>
