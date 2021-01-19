@@ -20,4 +20,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Run Unit Tests
-      run: dotnet test --no-restore Library.Api.UnitTests/Library.Api.UnitTests.csproj
+      run: dotnet test --no-restore --no-build --filter FullyQualifiedName\!~IntegrationTests
